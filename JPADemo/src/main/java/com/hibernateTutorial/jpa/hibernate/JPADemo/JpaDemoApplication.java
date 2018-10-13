@@ -30,7 +30,7 @@ public class JpaDemoApplication implements CommandLineRunner{
 		
 		courseRepository.deleteById(10001L);*/
 		
-		courseRepository.playWithEntityManager();
+		//courseRepository.playWithEntityManager();
 		
 	}
 }
