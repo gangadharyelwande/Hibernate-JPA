@@ -1,12 +1,15 @@
 package com.hibernateTutorial.jpa.hibernate.JPADemo.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -17,7 +20,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 				query = "Select  c  From Course c"),		
 		@NamedQuery(name = "query_get_100_Step_courses", 
 		query = "Select  c  From Course c where name like '%100 Steps'") })
-public class Course {
+
+	public class Course {
 	
 	@Id
 	@GeneratedValue
@@ -30,6 +34,9 @@ public class Course {
 
 	@CreationTimestamp
 	private LocalDateTime createdDate;
+	
+	@OneToMany(mappedBy="course")
+	private List<Review> reviews = new ArrayList<>();
 	
 
 	protected Course() {
@@ -66,6 +73,21 @@ public class Course {
 	public Long getId() {
 		return id;
 	}
+	
+	
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void addReview(Review review) {
+		this.reviews.add(review);
+	}
+
+	public void removeReview(Review review) {
+		this.reviews.remove(review);
+	}
+
 
 	@Override
 	public String toString() {
