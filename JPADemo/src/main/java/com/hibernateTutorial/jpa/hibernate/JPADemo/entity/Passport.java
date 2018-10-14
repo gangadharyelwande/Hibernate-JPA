@@ -1,8 +1,10 @@
 package com.hibernateTutorial.jpa.hibernate.JPADemo.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -13,7 +15,10 @@ public class Passport {
 	private Long id;
 	
 	private String number;
-
+	
+	@OneToOne(fetch=FetchType.LAZY, mappedBy="passport")
+	private Student student;
+	
 	protected Passport() {
 		
 	}
@@ -22,6 +27,14 @@ public class Passport {
 		this.number = number;
 	}
 	
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
 	public String getNumber() {
 		return number;
 	}
